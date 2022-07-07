@@ -2,13 +2,11 @@ import React from "react";
 import Container from "../components/container";
 import HeroPost from "../components/hero-post";
 import Intro from "../components/intro";
-import MoreStories from "../components/more-stories";
 import { HelmetDatoCms } from "gatsby-source-datocms";
 import { graphql } from "gatsby";
 
-export default function Index({ data: { allPosts, site, blog } }) {
+export default function Index({ data: { allPosts, site, blog, home } }) {
   const heroPost = allPosts.nodes[0];
-  const morePosts = allPosts.nodes.slice(1);
 
   return (
     <Container>
@@ -24,7 +22,8 @@ export default function Index({ data: { allPosts, site, blog } }) {
           excerpt={heroPost.excerpt}
         />
       )}
-      {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+
+      <iframe src={home.iframeSourceUrl} frameborder="0" title="embeded player"/>
     </Container>
   );
 }
@@ -35,6 +34,9 @@ export const query = graphql`
       favicon: faviconMetaTags {
         ...GatsbyDatoCmsFaviconMetaTags
       }
+    }
+    home: datoCmsBlog {
+      iframeSourceUrl
     }
     blog: datoCmsBlog {
       seo: seoMetaTags {

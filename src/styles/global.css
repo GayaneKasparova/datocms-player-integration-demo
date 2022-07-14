@@ -1,9 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-iframe {
-    min-width: 320px;
-    height: 222px;
-    width: 100%;
-}
